@@ -1,27 +1,7 @@
 const UserService = require('../services/user.service');
-
-const jwt = require('jsonwebtoken');
-const generateJWTTokens = require('../utils/jwt.generate.util');
-const cookieConfig = require('../config/cookie.config');
-
-const formatResponse = require('../utils/formatResponse');
+const formatResponse = require('../utils/response.format.util');
 
 class UserController {
-	static async refreshTokens(req, res, next) {
-		try {
-			const { user } = jwt.verify(req.cookies.refreshToken, process.env.SECRET_REFRESH_TOKEN);
-			const { accessToken, refreshToken } = generateJWTTokens({ user });
-
-			res
-				.status(200)
-				.cookie('refreshToken', refreshToken, cookieConfig)
-				.json(formatResponse(200, 'User session successfully extended', { user, accessToken }));
-		} catch (error) {
-			res.clearCookie('refreshToken');
-			next(error);
-		}
-	}
-
 	static async getAllUsers(req, res, next) {
 		try {
 			const users = await UserService.getAllUsers();

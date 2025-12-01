@@ -6,13 +6,13 @@ const path = require('path');
 
 // Third-party dependencies
 const express = require('express');
+const helmet = require('helmet');
 const cors = require('cors');
 const morgan = require('morgan');
 const cookieParser = require('cookie-parser');
 
 // Local files
-const errorHandler = require('./middleware/error.handler.middleware')
-const removeHttpHeader = require('./middleware/removeHTTPHeader');
+const errorHandler = require('./middleware/error.handler.middleware');
 const router = require('./routes/main.routes');
 
 const app = express();
@@ -36,7 +36,7 @@ const corsOptions = {
 app.use(cors(corsOptions));
 
 // Middlewares
-app.use(removeHttpHeader);
+app.use(helmet());
 
 // Parsers
 app.use(express.json());

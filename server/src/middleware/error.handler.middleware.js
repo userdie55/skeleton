@@ -1,4 +1,4 @@
-module.exports = (error, req, res, next) => {
+module.exports = (error, req, res) => {
 	const status = error.status || 500;
 	const message = error.message || 'Internal Server Error';
 
