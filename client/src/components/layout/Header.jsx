@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
-import { ArrowRightIcon } from '@heroicons/react/24/solid';
-import logo from '../../assets/react.svg';
+import { ArrowLeftIcon, ArrowRightIcon } from '@heroicons/react/24/solid';
+import logo from '../../assets/skeleton.png';
 
 export default function Header({ user }) {
   return (
@@ -8,14 +8,14 @@ export default function Header({ user }) {
       <nav className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
         {/* LEFT — LOGO */}
         <Link to="/" className="flex items-center gap-2">
-          <img src={logo} alt="logo" className="h-8 w-auto" />
+          <img src={logo} alt="logo" className="h-10 w-auto hover:scale-110 transition" />
         </Link>
 
         {/* CENTER — MENU */}
         <div className="hidden sm:flex gap-6">
           <Link
             to="/"
-            className="px-4 py-2 rounded-xl text-grey-600 font-semibold hover:text-indigo-700 hover:scale-105 transition"
+            className="px-4 py-2 rounded-xl text-grey-600 font-semibold hover:text-indigo-700 hover:scale-110 transition"
           >
             Home
           </Link>
@@ -24,20 +24,20 @@ export default function Header({ user }) {
         {/* RIGHT — LOGIN / PROFILE */}
         <div className="hidden sm:flex items-center gap-4">
           {user ? (
-            <div className="flex items-center gap-3">
-              <img
-                src="https://picsum.photos/200"
-                alt="avatar"
-                className="h-9 w-9 rounded-full border border-gray-300 shadow-sm"
-              />
-            </div>
+            <Link
+              to="/signOut"
+              className="flex items-center gap-1 px-4 py-2 text-grey-600 font-semibold hover:text-indigo-700 hover:scale-110 transition"
+            >
+              <span>Log out</span>
+              <ArrowRightIcon className="size-5" />
+            </Link>
           ) : (
             <Link
               to="/signIn"
-              className="flex items-center gap-1 px-4 py-2 text-grey-600 font-semibold hover:text-indigo-700 hover:scale-105 transition"
+              className="flex items-center gap-1 px-4 py-2 text-grey-600 font-semibold hover:text-indigo-700 hover:scale-110 transition"
             >
               <span>Log in</span>
-              <ArrowRightIcon className="size-5" />
+              <ArrowLeftIcon className="size-5" />
             </Link>
           )}
         </div>

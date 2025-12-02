@@ -17,8 +17,9 @@ export default function App() {
     (async () => {
       try {
         const response = await axiosInstance.get('/auth/');
-        setUser(response.data.user);
-        setAccessToken(response.data.accessToken);
+
+        setUser(response.data.data.user);
+        setAccessToken(response.data.data.accessToken);
       } catch (error) {
         console.log(error);
       }
@@ -31,13 +32,13 @@ export default function App() {
 
       <main className="flex-1 flex">
         <Routes>
-          <Route path="/signUp" element={<SignUpPage user={setUser} />} />
-          <Route path="/signIn" element={<SignInPage user={setUser} />} />
-          <Route path="/signOut" element={<SignOutPage user={setUser} />} />
+          <Route path="/signUp" element={<SignUpPage setUser={setUser} />} />
+          <Route path="/signIn" element={<SignInPage setUser={setUser} />} />
+          <Route path="/signOut" element={<SignOutPage setUser={setUser} />} />
         </Routes>
       </main>
 
-      <Footer user={user} />
+      <Footer />
     </div>
   );
 }

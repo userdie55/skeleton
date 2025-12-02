@@ -20,8 +20,8 @@ export default function SignUpForm({ setUser }) {
 
       const response = await axiosInstance.post('./auth/signUp', inputs);
 
-      setUser(response.data.user);
-      setAccessToken(response.data.accessToken);
+      setUser(response.data.data.user);
+      setAccessToken(response.data.data.accessToken);
 
       navigate('/');
     } catch (error) {
@@ -70,7 +70,7 @@ export default function SignUpForm({ setUser }) {
 
           <button
             type="submit"
-            className="mt-4 px-6 py-3 rounded-xl bg-indigo-600 text-white font-semibold shadow-md hover:bg-indigo-500 hover:scale-105 transition"
+            className="mt-4 px-6 py-3 rounded-xl bg-indigo-600 text-white font-semibold shadow-md hover:bg-indigo-500 hover:scale-110 transition"
           >
             Sign Up
           </button>

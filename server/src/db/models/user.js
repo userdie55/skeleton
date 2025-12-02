@@ -3,7 +3,9 @@ const bcrypt = require('bcrypt');
 
 module.exports = (sequelize, DataTypes) => {
 	class User extends Model {
-		static associate(models) {}
+		static associate(models) {
+			this.hasMany(models.Task, { foreignKey: 'user_id', as: 'tasks' });
+		}
 
 		// Email validation
 		static validateEmail(email) {

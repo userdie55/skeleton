@@ -24,7 +24,8 @@ class AuthController {
 
 	static async signUp(req, res, next) {
 		try {
-			const { user, accessToken, refreshToken } = await AuthService.signUpUser(req.body);
+			const { user, accessToken, refreshToken } = await AuthService.signUp(req.body);
+
 			res
 				.status(201)
 				.cookie('refreshToken', refreshToken, cookieConfig)
@@ -36,7 +37,7 @@ class AuthController {
 
 	static async signIn(req, res, next) {
 		try {
-			const { user, accessToken, refreshToken } = await AuthService.signUpUser(req.body);
+			const { user, accessToken, refreshToken } = await AuthService.signIn(req.body);
 			res
 				.status(200)
 				.cookie('refreshToken', refreshToken, cookieConfig)
@@ -48,7 +49,7 @@ class AuthController {
 
 	static async signOut(req, res, next) {
 		try {
-			res.sendStatus(200).clearCookie('refreshToken');
+			res.clearCookie('refreshToken').sendStatus(200);
 		} catch (error) {
 			next(error);
 		}
